@@ -1,0 +1,13 @@
+//
+//  RmRequest.swift
+//  Ricky
+//
+//  Created by Apple on 07/06/23.
+//
+
+import Foundation
+
+/// Request object
+final class RmRequest {
+    
+}

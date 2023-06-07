@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+/// Location VC
 final class RMLocationViewController: UIViewController {
 
     override func viewDidLoad() {

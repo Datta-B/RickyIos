@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+/// Setting Vc
 final class RMSettingsViewController: UIViewController {
 
     override func viewDidLoad() {

@@ -7,8 +7,10 @@
 
 import UIKit
 
-final class RmCharacterViewController: UIViewController {
 
+/// Character Vc
+final class RmCharacterViewController: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
