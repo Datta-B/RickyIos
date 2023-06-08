@@ -21,8 +21,9 @@ final class RmService {
     /// Send Rikcy Api Call
     /// - Parameters:
     ///   - request: request
+    ///   - type : expected Type
     ///   - Completion: Callback with data or error
-    public func execute(_ request: RmRequest, Completion : @escaping () -> Void) {
+    public func execute<T:Codable>(_ request: RmRequest, ExpectedType : T.Type, Completion : @escaping (Result<T,Error>) -> Void) {
         
     }
 }
