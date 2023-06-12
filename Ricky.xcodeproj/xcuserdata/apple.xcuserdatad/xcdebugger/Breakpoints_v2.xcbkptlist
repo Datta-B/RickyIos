@@ -20,16 +20,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E756FFA9-A618-41DA-B502-930FBB385998"
-            shouldBeEnabled = "No"
+            uuid = "8564E031-29FC-46E3-A618-60EE0BF545AC"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Ricky/Controllers/Core/RMEpisodesViewController.swift"
+            filePath = "Ricky/APIClient/RmService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "execute(_:Expecting:Completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

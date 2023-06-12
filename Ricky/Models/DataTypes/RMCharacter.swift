@@ -18,7 +18,7 @@ struct RMCharacter : Codable {
     let origin: RMOrigin
     let location: SingleLocation
     let image: String
-    let episode: [ String]
+    let episode: [String]
     let url: String
     let created: String
     
@@ -45,6 +45,6 @@ enum RmCharacterGender : String,Codable {
      case male = "Male"
      case female = "Female"
      case genderless = "Genderless"
-     case unknown = "unknow"
+     case unknown = "unknown"
     
 }

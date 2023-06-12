@@ -14,8 +14,7 @@ final class RMEpisodesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let request = RmRequest(endpoint: .episode)
-        print(request.url)
+        
     }
     
 
