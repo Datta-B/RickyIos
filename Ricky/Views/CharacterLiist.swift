@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol RMCharacterListViewDelegate : AnyObject {
+    func rmCharacterListView(_ characterListView:CharacterLiist, didSelectCharacter:RMCharacter)
+}
+
 /// View Shows CharacterList with loader
 final class CharacterLiist: UIView {
    
+    public weak var delegate : RMCharacterListViewDelegate?
     private let viewModel = CharacterListViewModel()
     
     private let spinner : UIActivityIndicatorView = {
@@ -22,12 +27,16 @@ final class CharacterLiist: UIView {
     private let collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero,collectionViewLayout: layout)
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10)
         layout.scrollDirection = .vertical
         cv.isHidden = true
         cv.alpha = 0
         cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        cv.register(RMCharacterCollectionViewCell.self, forCellWithReuseIdentifier: RMCharacterCollectionViewCell.cellIdentifier)
+        
+        cv.register(RMFooterLoaderCollectionReusableView.self,forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+                    withReuseIdentifier: RMFooterLoaderCollectionReusableView.cellIdentifier)
+        
         
         return cv
     }()
@@ -40,6 +49,8 @@ final class CharacterLiist: UIView {
         addConstraints()
         setUpCollectionView()
         spinner.startAnimating()
+        viewModel.delegate = self
+        viewModel.fetchCharacters()
 //        addSubviews(collectionView,spinner)
         
     }
@@ -69,15 +80,25 @@ final class CharacterLiist: UIView {
     private func setUpCollectionView(){
         collectionView.dataSource = viewModel
         collectionView.delegate = viewModel
-       
-        DispatchQueue.main.asyncAfter(deadline: .now()+2, execute: {
-            self.spinner.stopAnimating()
-            self.collectionView.isHidden = false
-            UIView.animate(withDuration: 0.3) {
-                self.collectionView.alpha = 1
-            }
-        })
+        
     }
 }
 
 
+extension CharacterLiist : RMCharacterListViewModelDelegate {
+    
+    func didSelectCharacter(_ character: RMCharacter) {
+        delegate?.rmCharacterListView(self, didSelectCharacter: character)
+    }
+    
+    func loadCharacterCV() {
+        DispatchQueue.main.async { [weak self] in
+            self?.spinner.stopAnimating()
+            self?.collectionView.isHidden = false
+            self?.collectionView.reloadData()
+            UIView.animate(withDuration: 0.3) {
+                self?.collectionView.alpha = 1
+            }
+        }
+    }
+}

@@ -39,6 +39,15 @@ enum RMCharacterStatus : String,Codable {
     case alive = "Alive"
     case dead = "Dead"
     case unknown = "unknown"
+    
+    var text : String {
+        switch self {
+        case .alive,.dead:
+           return rawValue
+        case .unknown:
+            return "Unknown"
+        }
+    }
 }
 
 enum RmCharacterGender : String,Codable {
@@ -46,5 +55,7 @@ enum RmCharacterGender : String,Codable {
      case female = "Female"
      case genderless = "Genderless"
      case unknown = "unknown"
+    
+   
     
 }

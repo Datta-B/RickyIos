@@ -9,7 +9,8 @@ import UIKit
 
 
 /// Character Vc
-final class RmCharacterViewController: UIViewController {
+final class RmCharacterViewController: UIViewController, RMCharacterListViewDelegate {
+  
     
     private let characterListView = CharacterLiist()
     
@@ -17,6 +18,7 @@ final class RmCharacterViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         view.addSubview(characterListView)
+        characterListView.delegate = self
         NSLayoutConstraint.activate([
             characterListView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             characterListView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
@@ -26,6 +28,18 @@ final class RmCharacterViewController: UIViewController {
         ])
         
     }
-  
-      
+    
+    // Delegate Function
+    
+    func rmCharacterListView(_ characterListView: CharacterLiist, didSelectCharacter: RMCharacter) {
+        
+        let viewModel = RMCharacterDetailViewModel(character:didSelectCharacter)
+        let vc = DetailCharacterListViewViewController(viewModel: viewModel)
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: false)
+        
+    }
+    
+    
+    
 }
