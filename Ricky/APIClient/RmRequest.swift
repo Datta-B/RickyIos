@@ -77,8 +77,14 @@ final class RmRequest {
             let components = trimmed.components(separatedBy: "/")
             if !components.isEmpty {
                 let endPointStr = components[0]
+                var pathComponts : [String] = []
+                if components.count > 1{
+                    pathComponts = components
+                    pathComponts.removeFirst()
+                }
                 if let rmEndPoint = RmEndpoint(rawValue: endPointStr){
-                    self.init(endpoint: rmEndPoint)
+                    self.init(endpoint: rmEndPoint,pathComponents: pathComponts)
+                    return
                 }
             }
         }else if trimmed.contains("?"){
